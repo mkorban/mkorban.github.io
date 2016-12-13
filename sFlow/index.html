@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+
+<html lang="ru">
+
+<head>
+    <meta charset="utf-8">
+    <title>Hello...</title>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.min.js"></script>
+</head>
+
+<body>
+<div id="mainContent"></div>
+
+<script src="//api.bitrix24.com/api/v1/"></script>
+
+<script>
+    /* global BX24 */
+    /* global $ */
+    $(function() {
+        BX24.init(function() {
+            console.log('Инициализация завершена!', BX24.isAdmin());
+            BX24.callMethod('user.current', {}, function(res) {
+                let user = res.data();
+
+                $("#mainContent").text(`Привет, ${user.LAST_NAME} ${user.NAME}`);
+                console.log(res.data());
+            });
+        });
+    });
+</script>
+
+</body>
+
+</html>
